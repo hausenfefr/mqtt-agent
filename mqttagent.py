@@ -6,19 +6,16 @@ import paho.mqtt.subscribe as subscribe
 
 def inmsg(client, userdata, message):
 
-    if message.topic == "/runner":
-        if message.payload == "stats":
-            os.startfile('stats.lnk')
-        if message.payload == "web":
-            os.startfile('web.url')
-        if message.payload == "calc":
-            os.startfile('calc')
-        if message.payload == "notepad":
-            os.startfile('notepad')
-        if message.payload == "paint":
-            os.startfile('mspaint')
+    if message.topic == "/run":
+        
         if message.payload == "exit":
             os._exit(1)
+        if os.path.isfile(message.payload + '.bat'):
+            os.startfile(message.payload + '.bat')
+        if os.path.isfile(message.payload + '.lnk'):
+            os.startfile(message.payload + '.lnk')
+        if os.path.isfile(message.payload + '.url'):
+            os.startfile(message.payload + '.url')
             
 subscribe.callback(inmsg, "#", hostname="hausenfefr.com")
 
