@@ -20,6 +20,5 @@ def inmsg(client, userdata, message):
         if message.payload == "exit":
             os._exit(1)
             
-print("waiting...")
 subscribe.callback(inmsg, "#", hostname="hausenfefr.com")
 
